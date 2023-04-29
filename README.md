@@ -14,6 +14,8 @@
 
 4.  使用网络代理,正常网络就可以访问！
 
+5.  在apk目录下有独立的APP,目前只支持安卓系统安装！
+
 ## Available Scripts
 
 In the project directory, you can run:

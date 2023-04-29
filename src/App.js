@@ -11,8 +11,8 @@ import { useState } from 'react';
 const initialMessages = [
   {
     type: 'text',
-    content: { text: '主人好，我是基于chatGPT的chatBot，可以回答问题、翻译、写作等，欢迎随时与我交流~' },
-    user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+    content: { text: '主人好，我是基于chatGPT的智能机器人，可以回答问题、翻译、写作等，欢迎随时与我交流~' },
+    user: { avatar: './ChatGPT_logo.png' },
   },
   // {
   //   type: 'image',
@@ -25,7 +25,7 @@ const initialMessages = [
 // 默认快捷短语，可选
 const defaultQuickReplies = [
   {
-    name: '自我介绍一下',
+    name: '你可以做什么',
     isNew: true,
   },
   {
@@ -75,6 +75,12 @@ export default function () {
     setOpen(false);
   }
 
+  // 判断红点
+  if(localStorage.getItem('clickFlag')) {
+    defaultQuickReplies[0].isNew = false
+  }else {
+    defaultQuickReplies[0].isNew = true
+  }
   // 发送回调
   // function handleSend(type, val) {
   //   if (type === 'text' && val.trim()) {
@@ -116,7 +122,7 @@ export default function () {
       axios
         .post(
           // 'https://api.openai.com/v1/chat/completions',
-          'https://open.aiproxy.xyz/v1/chat/completions',
+          'https://open.aiproxy.xyz/v1/chat/completions', // 网络代理
           {
             messages: [...chatMessage, { content: val, role: 'user' }],
             max_tokens: 2048,
@@ -164,8 +170,9 @@ export default function () {
       handleOpen()
       return
     }
-    if (item.name == "自我介绍一下") {
+    if (item.name == "你可以做什么") {
       defaultQuickReplies[0].isNew = false
+      localStorage.setItem('clickFlag', false)
     }
     if (item.name == "刷新页面") {
       window.location.reload()

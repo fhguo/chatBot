@@ -2,6 +2,7 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@chatui/core": "^2.4.2",
     "@testing-library/jest-dom": "^5.16.5",
