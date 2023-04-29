@@ -44,6 +44,11 @@ const defaultQuickReplies = [
     isHighlight: false,
   },
   {
+    icon: "check-circle",
+    name: '下载APP',
+    // isHighlight: true,
+  },
+  {
     icon: "folder",
     name: '前端笔记',
     // isHighlight: true,
@@ -176,6 +181,10 @@ export default function () {
     }
     if (item.name == "刷新页面") {
       window.location.reload()
+      return
+    }
+    if (item.name == "下载APP") {
+      window.location.href = "https://gitee.com/gfh_he/chat-robot/blob/master/apk/chatBot.apk"
       return
     }
     if (item.name == "前端笔记") {
