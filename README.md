@@ -12,6 +12,8 @@
 
 3.  项目纯前端页面,使用gitee pages或者 github pages部署就行！
 
+4.  使用网络代理,正常网络就可以访问！
+
 ## Available Scripts
 
 In the project directory, you can run:

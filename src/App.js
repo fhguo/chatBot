@@ -172,7 +172,7 @@ export default function () {
       return
     }
     if (item.name == "前端笔记") {
-      window.location = "https://g_dev.gitee.io/vue-press/#/"
+      window.location = "https://gfh_he.gitee.io/vue-press/#/"
       return
     }
     handleSend('text', item.name);
