@@ -17,8 +17,8 @@ const  routes = [
         path:'/home',//路径
         component:Home,//组件
         exact:true,//是否精准匹配 true:是  false:否
-        isLogin:false,//是否需要做登录验证  true:是  false:否
-        meta:{title:'chatBot'},//路由元信息
+        // isLogin:false,//是否需要做登录验证  true:是  false:否
+        meta:{title:'智能助理'},//路由元信息
     },
 ]
 
