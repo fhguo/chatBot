@@ -57,7 +57,11 @@ export default function () {
   // 输入Key
   const [open, setOpen] = useState(false);
   var [value1, setValue1] = useState('');
-  value1 = localStorage.getItem('apiKey');
+  function handleSetValue(val) {
+    setValue1(val)
+    value1 = localStorage.getItem('apiKey');
+  }
+  
   // 请求URL
   var baseUrl = "";
   if (localStorage.getItem('baseUrl')) {
@@ -82,7 +86,6 @@ export default function () {
   }
 
   function handleConfirm() {
-    // alert(value1);
     if (value1.length < 20) {
       toast.fail("格式不正确")
       return
@@ -238,7 +241,7 @@ export default function () {
       >
         <div>
           <p><span className='requird-span'>*</span>API Key</p>
-          <Input value={value1} onChange={val => setValue1(val)} placeholder="请输入API Key" />
+          <Input value={value1} onChange={val => handleSetValue(val)} placeholder="请输入API Key" />
           <p>API Server</p>
           {/* 单选 */}
           <RadioGroup value={value} options={options} onChange={handleChange} />
