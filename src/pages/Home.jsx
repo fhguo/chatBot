@@ -37,7 +37,7 @@ const defaultQuickReplies = [
   },
   {
     // icon: "cancel",
-    name: '推荐几首音乐',
+    name: '推荐一部科幻电影',
     // isHighlight: true,
   },
   // {
@@ -222,12 +222,15 @@ export default function () {
     localStorage.setItem('baseUrl', baseUrl);
     console.log(`Selected value: ${selectedValue}`);
   }
+  function clear() {
+    window.location.reload();
+  }
   return (
     [
       <div className='head'>
         <div className='head-set' onClick={()=>setOption()}><img src= {process.env.PUBLIC_URL + '/set.png'}  alt="设置" /></div>
         <div className='head-title'>chatBot</div>
-        <div className='head-clear' onClick={() => window.location.reload()}><img src= {process.env.PUBLIC_URL + '/clear.png'}  alt="清空" /></div>
+        <div className='head-clear' onClick={() => clear()}><img src= {process.env.PUBLIC_URL + '/clear.png'}  alt="清空" /></div>
       </div>,
       <Chat
         // navbar={{ title: 'chatBot' }}
@@ -259,8 +262,8 @@ export default function () {
           <p><span className='requird-span'>*</span>API Key</p>
           <Input value={value1} onChange={val => setValue1(val)} placeholder="请输入API Key" />
           <p>API Server</p>
-          <label><input type='radio' name="option" onChange={()=>{handleRadioChange()}} value="https://api.openai.com" /><span>https://api.openai.com (官方)</span></label><br />
-          <label><input type='radio' name="option" onChange={()=>{handleRadioChange()}} value="https://open.aiproxy.xyz" /><span>https://open.aiproxy.xyz (代理)</span></label>
+          <label><input type='radio' name="option" onClick={handleRadioChange} value="https://api.openai.com" /><span>https://api.openai.com (官方)</span></label><br />
+          <label><input type='radio' name="option" readOnly checked onClick={handleRadioChange} value="https://open.aiproxy.xyz" /><span>https://open.aiproxy.xyz (代理)</span></label>
         </div>
       </Modal>
     ]

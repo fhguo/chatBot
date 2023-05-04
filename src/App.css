@@ -34,7 +34,7 @@
 }
 
 .home {
-  height: 100%;
+  height: calc(100% - 45px);
 }
 
 .head {
@@ -45,7 +45,9 @@
 
 .head-set, .head-clear {
   width: 20px;
-  height: 20px;
+  height: 45px;
+  display: flex;
+  align-items: center;
 }
 
 .head-set img, .head-clear img{
