@@ -33,6 +33,49 @@
   margin-right: 5px;
 }
 
+.home {
+  height: 100%;
+}
+
+.head {
+  height: 45px;
+  line-height: 45px;
+  background-color: #EEEEEE;
+}
+
+.head-set, .head-clear {
+  width: 20px;
+  height: 20px;
+}
+
+.head-set img, .head-clear img{
+  width: 100%;
+  cursor: pointer;
+}
+
+.head {
+  width: 100%;
+  /* border: 1px solid pink; */
+  border-bottom: 1px solid var(--gray-5);
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.head-title {
+  color: var(--gray-1);
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+label span {
+  line-height: 25px;
+  margin-left: 5px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
