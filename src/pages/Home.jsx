@@ -48,7 +48,7 @@ const defaultQuickReplies = [
 const options = [
   { label: 'openAI官方', value: 'https://api.openai.com' },
   { label: '代理A', value: 'https://open.aiproxy.xyz' },
-  { label: '代理B', value: 'https://Inkcast.com' },
+  { label: '代理B', value: 'https://Inkcast.com', disabled: true },
 ];
 
 export default function () {
