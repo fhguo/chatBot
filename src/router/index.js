@@ -2,6 +2,7 @@ import React from 'react'
 import {Switch,Route,Redirect,withRouter} from 'react-router-dom'
 // 导入组件
 import Home from '../pages/Home'
+import NotFound from '../pages/404'
 
 
 // 自定义路由规则
@@ -17,9 +18,16 @@ const  routes = [
         path:'/home',//路径
         component:Home,//组件
         exact:true,//是否精准匹配 true:是  false:否
-        // isLogin:false,//是否需要做登录验证  true:是  false:否
+        isLogin:false,//是否需要做登录验证  true:是  false:否
         meta:{title:'智能助理'},//路由元信息
     },
+    {
+        path:'*',//访问不存在的路径
+        component:NotFound,
+        exact:true,//是否精准匹配 true:是  false:否
+        isLogin:false,//是否需要做登录验证  true:是  false:否
+        meta:{title:'404页面'},//路由元信息
+    }
 ]
 
 

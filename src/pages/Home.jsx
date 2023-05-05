@@ -56,26 +56,21 @@ export default function () {
   const { messages, appendMsg, setTyping } = useMessages(initialMessages);
   // 输入Key
   const [open, setOpen] = useState(false);
-  var [value1, setValue1] = useState(localStorage.getItem('apiKey') || "");
+  var [keyValue, setValue1] = useState(localStorage.getItem('apiKey') || "");
   function handleSetValue(val) {
     setValue1(val)
-    value1 = localStorage.getItem('apiKey');
+    keyValue = localStorage.getItem('apiKey');
   }
   
   // 请求URL
-  var baseUrl = "";
-  if (localStorage.getItem('baseUrl')) {
-    baseUrl = localStorage.getItem('baseUrl')
-  } else {
-    baseUrl = "https://open.aiproxy.xyz"
-  }
+  // var [baseUrl, setValue] = useState("https://open.aiproxy.xyz");
+  // if (localStorage.getItem('baseUrl')) {
+  //   baseUrl = localStorage.getItem('baseUrl')
+  // }
 
-  const [value, setValue] = useState("https://open.aiproxy.xyz");
+  var [baseUrl, setValue] = useState("https://open.aiproxy.xyz");
   function handleChange(val) {
     setValue(val);
-    baseUrl = val
-    // console.log(val);
-    localStorage.setItem('baseUrl', val);
   }
   function handleOpen() {
     setOpen(true);
@@ -86,11 +81,14 @@ export default function () {
   }
 
   function handleConfirm() {
-    if (value1.length < 20) {
+    if (keyValue.length < 20) {
       toast.fail("格式不正确")
       return
     }
-    localStorage.setItem('apiKey', value1)
+    console.log(2, baseUrl);
+    // 将输入信息存储本地
+    localStorage.setItem('apiKey', keyValue)
+    localStorage.setItem('baseUrl', baseUrl);
     toast.success("操作成功")
     setOpen(false);
   }
@@ -241,10 +239,10 @@ export default function () {
       >
         <div>
           <p><span className='requird-span'>*</span>API Key</p>
-          <Input value={value1} onChange={val => handleSetValue(val)} placeholder="请输入API Key" />
+          <Input value={keyValue} onChange={val => handleSetValue(val)} placeholder="请输入API Key" />
           <p>API Server</p>
           {/* 单选 */}
-          <RadioGroup value={value} options={options} onChange={handleChange} />
+          <RadioGroup value={baseUrl} options={options} onChange={handleChange} />
         </div>
       </Modal>
     ]
