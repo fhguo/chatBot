@@ -56,7 +56,7 @@ export default function () {
   const { messages, appendMsg, setTyping } = useMessages(initialMessages);
   // 输入Key
   const [open, setOpen] = useState(false);
-  var [value1, setValue1] = useState('');
+  var [value1, setValue1] = useState(localStorage.getItem('apiKey') || "");
   function handleSetValue(val) {
     setValue1(val)
     value1 = localStorage.getItem('apiKey');
