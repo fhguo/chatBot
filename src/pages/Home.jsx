@@ -168,11 +168,11 @@ export default function () {
       localStorage.setItem('clickFlag', false)
     }
     if (item.name == "下载APP") {
-      window.location.href = "https://gitee.com/gfh_he/chat-robot/blob/master/apk/chatBot.apk"
+      window.location.href = "https://gitee.com/gfh_he/chat-robot/releases/tag/v1.0.0"
       return
     }
     if (item.name == "前端笔记") {
-      window.location = "https://gfh_he.gitee.io/vue-press/#/"
+      window.location = "https://gfh_he.gitee.io/vue-note/"
       return
     }
     handleSend('text', item.name);
