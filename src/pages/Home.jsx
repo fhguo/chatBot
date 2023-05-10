@@ -168,7 +168,7 @@ export default function () {
       localStorage.setItem('clickFlag', false)
     }
     if (item.name == "下载APP") {
-      window.location.href = "https://gitee.com/gfh_he/chat-robot/releases/tag/v1.0.0"
+      window.location.href = "https://gitee.com/gfh_he/chat-robot/releases"
       return
     }
     if (item.name == "前端笔记") {

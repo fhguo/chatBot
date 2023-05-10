@@ -14,11 +14,7 @@
 
 4.  支持切换API Server,使用网络代理后不需要科学上网！
 
-5.  在apk目录下有独立的APP,目前只支持安卓系统安装！
-
-## Available Scripts
-
-In the project directory, you can run:
+5.  有独立的APP,目前只支持安卓系统安装！
 
 ### `npm install`
 
@@ -26,9 +22,6 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 ### `npm run build`
 
