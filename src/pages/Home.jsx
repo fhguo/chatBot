@@ -26,7 +26,7 @@ const initialMessages = [
 // 默认快捷短语，可选
 const defaultQuickReplies = [
   {
-    icon:"keyboard-circle",
+    icon: "keyboard-circle",
     name: '奇思妙想',
     isNew: true
   },
@@ -114,15 +114,33 @@ export default function () {
   const [chatMessage, setChatMessage] = useState([]);
   // 知乎热榜
   function zhihuSend() {
-    axios.get('/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true')
-      .then((res) => {
-        // console.log(res.data.data);
-        sethotList(res.data.data.slice(0, 20))
-      })
-      .catch((err) => {
+    // axios.get('/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true')
+    //   .then((res) => {
+    //     // console.log(res.data.data);
+    //     sethotList(res.data.data.slice(0, 20))
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //     toast.fail("出错啦！请稍后再试")
+    //     handleClosePop()
+    //   })
+
+    fetch('https://www.zhihu.com/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true',//跨域请求的路径
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          'Accept': 'application/json,text/plain,*/*'
+        }
+      }).then(response => response.json()).then(result => {
+        console.log(result);
+        sethotList(result.data.data.slice(0, 20))
+      }).catch(function (err) {
         console.log(err)
         toast.fail("出错啦！请稍后再试")
-      })
+        handleClosePop()
+      });
+
   }
 
   // 发送回调
@@ -292,7 +310,7 @@ export default function () {
                 2.key值必须绑定在遍历的直接子元素上
                 3.key的做用:a:唯一标识 b.对元素进行添加,修改或者删除的唯一标识
             */}
-              {hotList.map(item => { 
+              {hotList.map(item => {
                 return <div className='zhihu-item' onClick={() => handleHot('text', item.target)}><div key={item.card_id}>{item.target.title}</div><Icon className='search-icon' type="chevron-right" /></div>
               })}
             </div>

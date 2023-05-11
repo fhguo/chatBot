@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
-  "proxy": "https://www.zhihu.com",
   "dependencies": {
     "@chatui/core": "^2.4.2",
     "@testing-library/jest-dom": "^5.16.5",
