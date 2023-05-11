@@ -2,7 +2,7 @@ import '../App.css';
 
 import '@chatui/core/es/styles/index.less';
 // 引入组件
-import Chat, { Bubble, useMessages, Modal, Input, toast, Radio, RadioGroup } from '@chatui/core';
+import Chat, { Bubble, useMessages, Modal, Input, toast, Radio, RadioGroup, Popup, Image, Icon } from '@chatui/core';
 // 引入样式
 import '@chatui/core/dist/index.css';
 import axios from "axios";
@@ -26,8 +26,12 @@ const initialMessages = [
 // 默认快捷短语，可选
 const defaultQuickReplies = [
   {
-    name: '你有情感吗',
-    isNew: true,
+    icon:"keyboard-circle",
+    name: '奇思妙想',
+    isNew: true
+  },
+  {
+    name: '你有意识吗',
   },
   {
     name: '从1加到100等于多少',
@@ -35,10 +39,10 @@ const defaultQuickReplies = [
   {
     name: '推荐一部科幻电影',
   },
-  {
-    icon: "check-circle",
-    name: '下载APP',
-  },
+  // {
+  //   icon: "check-circle",
+  //   name: '下载APP',
+  // },
   {
     icon: "folder",
     name: '前端笔记',
@@ -61,14 +65,12 @@ export default function () {
     setValue1(val)
     keyValue = localStorage.getItem('apiKey');
   }
-  
+
   // 请求URL
   // var [baseUrl, setValue] = useState("https://open.aiproxy.xyz");
-  // if (localStorage.getItem('baseUrl')) {
-  //   baseUrl = localStorage.getItem('baseUrl')
-  // }
-
-  var [baseUrl, setValue] = useState("https://open.aiproxy.xyz");
+  var localUrl = localStorage.getItem('baseUrl')
+  var [baseUrl, setValue] = useState(localUrl || "https://open.aiproxy.xyz");
+  var [hotList, sethotList] = useState([]);
   function handleChange(val) {
     setValue(val);
   }
@@ -80,12 +82,21 @@ export default function () {
     setOpen(false);
   }
 
+  const [openPop, setOpenPop] = useState(false);
+
+  function handleOpenPop() {
+    setOpenPop(true);
+  }
+
+  function handleClosePop() {
+    setOpenPop(false);
+  }
   function handleConfirm() {
     if (keyValue.length < 20) {
       toast.fail("格式不正确")
       return
     }
-    console.log(2, baseUrl);
+    // console.log(2, baseUrl);
     // 将输入信息存储本地
     localStorage.setItem('apiKey', keyValue)
     localStorage.setItem('baseUrl', baseUrl);
@@ -101,6 +112,19 @@ export default function () {
   }
 
   const [chatMessage, setChatMessage] = useState([]);
+  // 知乎热榜
+  function zhihuSend() {
+    axios.get('/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true')
+      .then((res) => {
+        // console.log(res.data.data);
+        sethotList(res.data.data.slice(0, 20))
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.fail("出错啦！请稍后再试")
+      })
+  }
+
   // 发送回调
   function handleSend(type, val) {
     var apiKey = localStorage.getItem('apiKey')
@@ -162,10 +186,12 @@ export default function () {
 
   // 快捷短语回调，可根据 item 数据做出不同的操作，这里以发送文本消息为例
   function handleQuickReplyClick(item) {
-    console.log(item.name);
-    if (item.name == "你有情感吗") {
+    if (item.name == "奇思妙想") {
       defaultQuickReplies[0].isNew = false
       localStorage.setItem('clickFlag', false)
+      zhihuSend()
+      handleOpenPop()
+      return
     }
     if (item.name == "下载APP") {
       window.location.href = "https://gitee.com/gfh_he/chat-robot/releases"
@@ -176,6 +202,12 @@ export default function () {
       return
     }
     handleSend('text', item.name);
+  }
+
+  function handleHot(type, target) {
+    setOpenPop(false);
+    // var content = target.excerpt + "  " +target.title
+    handleSend(type, target.title);
   }
 
   function renderMessageContent(msg) {
@@ -198,6 +230,7 @@ export default function () {
 
   // 打开模态框
   function setOption() {
+    // setValue("")
     handleOpen()
   }
 
@@ -222,7 +255,7 @@ export default function () {
       />,
       <Modal
         active={open}
-        title="设置"
+        title="openAI"
         showClose={false}
         onClose={handleClose}
         actions={[
@@ -244,7 +277,29 @@ export default function () {
           {/* 单选 */}
           <RadioGroup value={baseUrl} options={options} onChange={handleChange} />
         </div>
-      </Modal>
+      </Modal>,
+      <div>
+        <Popup
+          active={openPop}
+          title="选择以下话题 快速与我对话"
+          onClose={handleClosePop}
+        >
+          <div className='pop-outer'>
+            <h3>知乎热榜</h3>
+            <div className='zhihu-list'>
+              {/* 
+                1.在列表遍历时一定要绑定key
+                2.key值必须绑定在遍历的直接子元素上
+                3.key的做用:a:唯一标识 b.对元素进行添加,修改或者删除的唯一标识
+            */}
+              {hotList.map(item => { 
+                return <div className='zhihu-item' onClick={() => handleHot('text', item.target)}><div key={item.card_id}>{item.target.title}</div><Icon className='search-icon' type="chevron-right" /></div>
+              })}
+            </div>
+          </div>
+        </Popup>
+      </div>
+
     ]
   );
 }

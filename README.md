@@ -8,13 +8,15 @@
 
 1.  本项目使用GPT-3.5-turbo,支持记录上下文实现连续对话！
 
-2.  首次使用需要设置自己的 openai 的api key,api key保存本地,不会有安全问题！
+2.  首次使用需要设置自己的 openAI 的api key,api key保存本地,不会有安全问题！
 
 3.  项目纯前端页面,使用gitee pages或者 github pages部署就行！
 
 4.  支持切换API Server,使用网络代理后不需要科学上网！
 
 5.  有独立的APP,目前只支持安卓系统安装！
+
+6.  新增"奇思妙想",目前支持知乎热榜！
 
 ### `npm install`
 

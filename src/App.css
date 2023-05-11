@@ -78,6 +78,40 @@ label span {
   margin-left: 5px;
 }
 
+/* 弹出层 */
+.pop-outer {
+  padding: 0 20px;
+}
+.zhihu-list {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.zhihu-item {
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+}
+
+.zhihu-item:last-child {
+  border-bottom: none;
+}
+
+.zhihu-item:active {
+  color: #666;
+}
+
+.zhihu-item >div {
+  width: 92%;
+}
+
+.search-icon {
+  color: #999;
+  font-size: 25px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
