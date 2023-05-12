@@ -39,10 +39,10 @@ const defaultQuickReplies = [
   {
     name: '推荐一部科幻电影',
   },
-  // {
-  //   icon: "check-circle",
-  //   name: '下载APP',
-  // },
+  {
+    icon: "check-circle",
+    name: '下载APP',
+  },
   {
     icon: "folder",
     name: '前端笔记',
