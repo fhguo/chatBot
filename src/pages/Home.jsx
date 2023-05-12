@@ -114,32 +114,26 @@ export default function () {
   const [chatMessage, setChatMessage] = useState([]);
   // 知乎热榜
   function zhihuSend() {
-    // axios.get('/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true')
-    //   .then((res) => {
-    //     // console.log(res.data.data);
-    //     sethotList(res.data.data.slice(0, 20))
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //     toast.fail("出错啦！请稍后再试")
-    //     handleClosePop()
-    //   })
-
-    fetch('https://www.zhihu.com/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true',//跨域请求的路径
-      {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          'Accept': 'application/json,text/plain,*/*'
-        }
-      }).then(response => response.json()).then(result => {
-        console.log(result);
-        sethotList(result.data.data.slice(0, 20))
-      }).catch(function (err) {
+    // 调用第三方热榜接口
+    axios.get('https://api.oioweb.cn/api/common/HotList')
+      .then((res) => {
+        console.log(res.data.result.知乎);
+        sethotList(res.data.result.知乎.slice(0, 20))
+      })
+      .catch((err) => {
         console.log(err)
         toast.fail("出错啦！请稍后再试")
         handleClosePop()
-      });
+      })
+    // function handleData(data) {
+    //   // 处理数据
+    //   console.log(123);
+    // }
+    
+    // const url = '/api/v3/feed/topstory/hot-lists/total?limit=50&desktop=true&callback=handleData';
+    // const script = document.createElement('script');
+    // script.src = url;
+    // document.body.appendChild(script);
 
   }
 
@@ -311,7 +305,7 @@ export default function () {
                 3.key的做用:a:唯一标识 b.对元素进行添加,修改或者删除的唯一标识
             */}
               {hotList.map(item => {
-                return <div className='zhihu-item' onClick={() => handleHot('text', item.target)}><div key={item.card_id}>{item.target.title}</div><Icon className='search-icon' type="chevron-right" /></div>
+                return <div className='zhihu-item' onClick={() => handleHot('text', item)}><div key={item.index}>{item.title}</div><Icon className='search-icon' type="chevron-right" /></div>
               })}
             </div>
           </div>
